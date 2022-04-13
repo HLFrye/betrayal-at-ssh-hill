@@ -1,0 +1,7 @@
+{
+  "rooms": [
+    {
+      "name": "Grand Entryway",
+      "enter_text": "",
+      "num_exits": 3
+    },
