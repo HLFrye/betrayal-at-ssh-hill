@@ -3,7 +3,7 @@ from player import Player
 from board import Board
 
 class GamePrompt(Cmd):
-    prompt = "Game>"
+    prompt = "Game> "
     board = Board()
     player = Player()
     intro = board.get_room(player.pos).description() 

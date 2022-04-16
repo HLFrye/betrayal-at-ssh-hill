@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import frontmatter
 import glob
+from path import Path
 
 @dataclass
 class RoomData:
@@ -10,7 +11,8 @@ class RoomData:
 
 def load_room(f):
     inp = frontmatter.load(f)
-    return RoomData(name=inp["name"], enter_text=inp.content, num_exits=inp["num_exits"])
+    filename = Path(f).stem
+    return RoomData(name=inp.get("name", filename), enter_text=inp.content, num_exits=inp.get("num_exits", 0))
 
 def load_all_rooms():
     files = glob.glob("rooms/*.md")

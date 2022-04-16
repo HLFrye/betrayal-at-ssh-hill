@@ -4,16 +4,16 @@ import glob
 from pathlib import Path
 
 @dataclass
-class ItemData:
+class FateData:
   name: str
   description: str
   
-def load_item(f):
+def load_fate(f):
     inp = frontmatter.load(f)
     filename = Path(f).stem
     return ItemData(name=inp.get("name", filename), description=inp.content)
 
-def load_all_items():
-    files = glob.glob("items/*.md")
-    return [load_item(f) for f in files]
+def load_all_fates():
+    files = glob.glob("fates/*.md")
+    return [load_fate(f) for f in files]
 
