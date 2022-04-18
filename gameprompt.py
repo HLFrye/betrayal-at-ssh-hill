@@ -13,16 +13,23 @@ class GamePrompt(Cmd):
         return True
 
     def do_look(self, inp):
-        print("You look, but don't find anything")
-    
+        room = self.board.get_room(self.player.pos)
+        print(f"You are in the {room.name}")
+        print("")
+        print(room.description)
+        print("")
+        print(f"There are exits to the {', '.join(room.exits)}")
+
     def do_search(self, inp):
         print("After searching the room, you come up empty")
 
     def do_walk(self, inp):
+        old_pos = self.player.pos
         try:
           self.player.move(inp)
           new_pos = self.player.pos
           room = self.board.get_room(new_pos)
           print(room.description())
-        except: 
+        except:
+          self.player.pos = old_pos
           print("A mysterious force blocks you")

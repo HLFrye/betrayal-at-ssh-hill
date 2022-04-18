@@ -1,6 +1,25 @@
 from room import RoomData, load_all_rooms
+from fates import load_all_fates
+from item import load_all_items
 from playedroom import PlayedRoom
 from random import randint
+
+
+def orient_room(board, played_room, coords, drn):
+  exit_dir = ""
+  match drn:
+    case "east":
+      exit_dir = "west"
+    case "west":
+      exit_dir = "east"
+    case "north":
+      exit_dir = "south"
+    case "south":
+      exit_dir = "north"
+
+  all_other_dirs = ["north", "south", "east", "west"].remove(exit_dir)
+  other_exits = all_other_dirs[::played_room.data.num_exits - 1]
+  played_room.exits = [exit_dir, *other_exits]
 
 class Deck:
   def __init__(self, cards, top=None):

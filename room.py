@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import frontmatter
 import glob
-from path import Path
+from pathlib import Path
 
 @dataclass
 class RoomData:

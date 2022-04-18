@@ -11,7 +11,7 @@ class FateData:
 def load_fate(f):
     inp = frontmatter.load(f)
     filename = Path(f).stem
-    return ItemData(name=inp.get("name", filename), description=inp.content)
+    return FateData(name=inp.get("name", filename), description=inp.content)
 
 def load_all_fates():
     files = glob.glob("fates/*.md")
