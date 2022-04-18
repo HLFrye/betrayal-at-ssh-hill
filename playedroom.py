@@ -4,7 +4,7 @@ class PlayedRoom:
     self.item = item
     self.fate = fate
     self.enter_from = enter_from
-    self.exits = ["north", "east", "west", "south",][::self.data.num_exits]
+    self.exits = ["north", "east", "west", "south",][:self.data.num_exits]
 
   def description(self):
     return self.data.enter_text

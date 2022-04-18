@@ -17,8 +17,9 @@ def orient_room(board, played_room, coords, drn):
     case "south":
       exit_dir = "north"
 
-  all_other_dirs = ["north", "south", "east", "west"].remove(exit_dir)
-  other_exits = all_other_dirs[::played_room.data.num_exits - 1]
+  all_other_dirs = ["north", "south", "east", "west"]
+  all_other_dirs.remove(exit_dir)
+  other_exits = all_other_dirs[:(played_room.data.num_exits - 1)]
   played_room.exits = [exit_dir, *other_exits]
 
 class Deck:
@@ -53,4 +54,13 @@ class Board:
       self.spaces[coords] = played_room
     return self.spaces.get(coords)
 
+  def move_to_room(self, coords, drn):
+    if coords not in self.spaces:
+      room = self.rooms.get_next()
+      fate = self.fates.get_next() if randint(0, 10) == 0 else None
+      item = self.items.get_next if randint(0, 5) == 0 else None
+      played_room = PlayedRoom(self.rooms.get_next(), None, item, fate)
+      orient_room(self, played_room, coords, drn)
+      self.spaces[coords] = played_room
+    return self.spaces.get(coords)
     
